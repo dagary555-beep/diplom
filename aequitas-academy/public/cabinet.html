@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Личный кабинет - Академия AEQUITAS</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/logo1.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cabinet.css">
+    
+    <style>
+        /* Стили для форм входа/регистрации */
+        .auth-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 100px 20px;
+        }
+        
+        .auth-container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 40px;
+            padding: 45px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(64, 99, 20, 0.1);
+        }
+        
+        .auth-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 35px;
+            background: #f8f9fa;
+            padding: 5px;
+            border-radius: 60px;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            background: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .auth-tab.active {
+            background: linear-gradient(135deg, #406314, #5a8c29);
+            color: white;
+            box-shadow: 0 5px 15px rgba(64, 99, 20, 0.3);
+        }
+        
+        .auth-pane {
+            display: none;
+            animation: fadeInUp 0.4s ease;
+        }
+        
+        .auth-pane.active {
+            display: block;
+        }
+        
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        
+        .form-subtitle {
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #406314;
+            box-shadow: 0 0 0 3px rgba(64, 99, 20, 0.1);
+        }
+        
+        .role-selector-modern {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .role-card {
+            flex: 1;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .role-card input {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .role-card-content {
+            padding: 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .role-card input:checked + .role-card-content {
+            border-color: #406314;
+            background: linear-gradient(135deg, rgba(64, 99, 20, 0.05), rgba(90, 140, 41, 0.05));
+        }
+        
+        .role-card-content i {
+            font-size: 2rem;
+            color: #406314;
+            margin-bottom: 10px;
+        }
+        
+        .role-card-content h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .role-card-content p {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .teacher-code-field {
+            display: none;
+            animation: fadeInUp 0.3s ease;
+        }
+        
+        .teacher-code-field.show {
+            display: block;
+        }
+        
+        .submit-auth-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #406314, #5a8c29);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .submit-auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(64, 99, 20, 0.3);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .auth-footer a {
+            color: #406314;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .password-wrapper {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6c757d;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Стили для дашборда */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 100px auto 60px;
+            padding: 0 25px;
+        }
+        
+        .dashboard-header-modern {
+            background: linear-gradient(135deg, #1a2a0e 0%, #2d4a12 50%, #406314 100%);
+            border-radius: 32px;
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content-modern {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .welcome-section h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .welcome-section p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .user-role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+        
+        .role-student { background: linear-gradient(135deg, #1976d2, #2196f3); color: white; }
+        .role-teacher { background: linear-gradient(135deg, #f57c00, #ff9800); color: white; }
+        .role-admin { background: linear-gradient(135deg, #388e3c, #4caf50); color: white; }
+        
+        .logout-btn-modern {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn-modern:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .stats-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card-modern {
+            background: white;
+            border-radius: 24px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card-modern:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+        
+        .stat-icon-modern {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(64,99,20,0.1), rgba(90,140,41,0.1));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #406314;
+        }
+        
+        .stat-info-modern h3 {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .stat-number-modern {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1a1a2e;
+        }
+        
+        .student-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .dashboard-card-modern {
+            background: white;
+            border-radius: 28px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .dashboard-card-modern:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            transform: translateY(-3px);
+        }
+        
+        .card-header-modern {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .card-header-modern i {
+            font-size: 1.5rem;
+            color: #406314;
+        }
+        
+        .card-header-modern h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin: 0;
+        }
+        
+        .course-progress {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #406314, #5a8c29);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .empty-state-modern {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+        
+        .empty-state-modern i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+        
+        .admin-tabs-modern {
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            padding: 5px;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .admin-tab-modern {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+        
+        .admin-tab-modern i {
+            margin-right: 8px;
+        }
+        
+        .admin-tab-modern.active {
+            background: linear-gradient(135deg, #406314, #5a8c29);
+            color: white;
+        }
+        
+        .dashboard-section {
+            display: none;
+        }
+        
+        .dashboard-section.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-container { padding: 0 15px; margin: 80px auto 40px; }
+            .dashboard-header-modern { padding: 25px; }
+            .welcome-section h1 { font-size: 1.5rem; }
+            .student-dashboard { grid-template-columns: 1fr; }
+            .auth-card { padding: 30px 25px; }
+            .role-selector-modern { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo.png" alt="Логотип Академии AEQUITAS" class="nav-logo">
+            </a>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html" class="nav-link"><span>Главная</span></a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link"><span>О нас</span></a></li>
+            <li class="nav-item"><a href="admission.html" class="nav-link"><span>Поступление</span></a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link"><span>Новости</span></a></li>
+            <li class="nav-item"><a href="full-gallery.html" class="nav-link"><span>Медиа</span></a></li>
+            <li class="nav-item"><a href="contacts.html" class="nav-link"><span>Контакты</span></a></li>
+            <li class="nav-item"><a href="cabinet.html" class="nav-link cabinet active"><i class="fas fa-user-circle"></i><span>Личный кабинет</span></a></li>
+        </ul>
+        <button class="burger-menu" id="burgerMenu"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-list">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="admission.html">Поступление</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="full-gallery.html">Медиа</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+            <li><a href="cabinet.html"><i class="fas fa-user-circle"></i> Личный кабинет</a></li>
+        </ul>
+    </div>
+</header>
+
+<!-- НЕАВТОРИЗОВАННЫЙ КОНТЕНТ (ФОРМЫ ВХОДА/РЕГИСТРАЦИИ) -->
+<div id="unauthContent">
+    <section class="auth-hero">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="loginAuthTab">Вход</button>
+                    <button class="auth-tab" id="registerAuthTab">Регистрация</button>
+                </div>
+                
+                <!-- Панель входа -->
+                <div class="auth-pane active" id="loginPane">
+                    <h2 class="form-title">Добро пожаловать!</h2>
+                    <p class="form-subtitle">Войдите в свой аккаунт</p>
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" id="loginEmail" placeholder="your@email.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Пароль</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="loginPassword" placeholder="••••••" required>
+                                <button type="button" class="password-toggle" data-target="loginPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-options">
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="rememberMe"> Запомнить меня
+                            </label>
+                            <a href="#" id="forgotPasswordLink" style="color: #406314; text-decoration: none;">Забыли пароль?</a>
+                        </div>
+                        <button type="submit" class="submit-auth-btn">Войти</button>
+                    </form>
+                    <div class="auth-footer">
+                        <p>Нет аккаунта? <a href="#" id="switchToRegister">Зарегистрироваться</a></p>
+                    </div>
+                </div>
+                
+                <!-- Панель регистрации -->
+                <div class="auth-pane" id="registerPane">
+                    <h2 class="form-title">Создать аккаунт</h2>
+                    <p class="form-subtitle">Начните свой путь с AEQUITAS</p>
+                    <form id="registerForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="input-group">
+                                <label>Имя</label>
+                                <input type="text" id="firstName" placeholder="Иван" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Фамилия</label>
+                                <input type="text" id="lastName" placeholder="Петров" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" id="registerEmail" placeholder="your@email.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Телефон</label>
+                            <input type="tel" id="phone" placeholder="+7 (999) 123-45-67">
+                        </div>
+                        
+                        <!-- Выбор роли -->
+                        <div class="role-selector-modern">
+                            <label class="role-card">
+                                <input type="radio" name="role_type" value="student" checked>
+                                <div class="role-card-content">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <h4>Студент</h4>
+                                    <p>Доступ к обучению</p>
+                                </div>
+                            </label>
+                            <label class="role-card">
+                                <input type="radio" name="role_type" value="teacher">
+                                <div class="role-card-content">
+                                    <i class="fas fa-chalkboard-user"></i>
+                                    <h4>Преподаватель</h4>
+                                    <p>Требуется код</p>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <!-- Поле для кода преподавателя -->
+                        <div class="teacher-code-field" id="teacherCodeField">
+                            <div class="input-group">
+                                <label><i class="fas fa-key"></i> Код доступа</label>
+                                <input type="text" id="teacherCode" placeholder="Введите код доступа">
+                                <div id="codeVerifyStatus" style="font-size: 0.8rem; margin-top: 5px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label>Пароль</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="registerPassword" placeholder="Минимум 6 символов" required>
+                                <button type="button" class="password-toggle" data-target="registerPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <label style="display: flex; align-items: center; gap: 10px; margin: 20px 0;">
+                            <input type="checkbox" id="agreement" required>
+                            <span style="font-size: 0.85rem;">Я согласен с <a href="#" style="color: #406314;">условиями использования</a></span>
+                        </label>
+                        
+                        <button type="submit" class="submit-auth-btn">Зарегистрироваться</button>
+                    </form>
+                    <div class="auth-footer">
+                        <p>Уже есть аккаунт? <a href="#" id="switchToLogin">Войти</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- АВТОРИЗОВАННЫЙ КОНТЕНТ -->
+<div id="authContent" style="display: none;">
+    <div class="dashboard-container">
+        <!-- Шапка дашборда -->
+        <div class="dashboard-header-modern">
+            <div class="header-content-modern">
+                <div class="welcome-section">
+                    <h1 id="welcomeMessage">Добро пожаловать!</h1>
+                    <p><i class="fas fa-envelope"></i> <span id="userEmail"></span></p>
+                    <span class="user-role-badge" id="userRoleBadge"></span>
+                </div>
+                <button class="logout-btn-modern" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Выйти
+                </button>
+            </div>
+        </div>
+        
+        <!-- Навигация -->
+        <div class="admin-tabs-modern">
+            <button class="admin-tab-modern active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Главная</button>
+            <button class="admin-tab-modern" data-section="courses"><i class="fas fa-graduation-cap"></i> Мои курсы</button>
+            <button class="admin-tab-modern" data-section="homeworks"><i class="fas fa-tasks"></i> Задания</button>
+            <button class="admin-tab-modern" data-section="schedule"><i class="fas fa-calendar-alt"></i> Расписание</button>
+            <button class="admin-tab-modern" data-section="achievements"><i class="fas fa-trophy"></i> Достижения</button>
+        </div>
+        
+        <!-- Секция: Главная -->
+        <div id="dashboardSection" class="dashboard-section active">
+            <div class="stats-grid-modern" id="userStats"></div>
+            <div id="dashboardCourses"></div>
+        </div>
+        
+        <!-- Секция: Мои курсы -->
+        <div id="coursesSection" class="dashboard-section">
+            <div id="myCoursesList"></div>
+        </div>
+        
+        <!-- Секция: Задания -->
+        <div id="homeworksSection" class="dashboard-section">
+            <div id="homeworksList"></div>
+        </div>
+        
+        <!-- Секция: Расписание -->
+        <div id="scheduleSection" class="dashboard-section">
+            <div id="scheduleList"></div>
+        </div>
+        
+        <!-- Секция: Достижения -->
+        <div id="achievementsSection" class="dashboard-section">
+            <div id="achievementsList"></div>
+        </div>
+    </div>
+</div>
+
+<footer class="main-footer">
+    <div class="footer-content">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo"><img src="images/logo.png" alt="Академия AEQUITAS" class="footer-logo-img"></div>
+                    <p class="footer-description">Ведущая школа-интернат, сочетающая лучшие традиции классического образования с инновационными технологиями обучения.</p>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-title">Навигация</h3>
+                    <ul class="footer-menu">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="admission.html">Поступление</a></li>
+                        <li><a href="news.html">Новости</a></li>
+                        <li><a href="full-gallery.html">Медиа</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="cabinet.html">Личный кабинет</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-title">Контакты</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i><span>г. Москва, ул. Образцовая, 15</span></li>
+                        <li><i class="fas fa-phone-alt"></i><span>+7 (495) 123-45-67</span></li>
+                        <li><i class="fas fa-envelope"></i><span>info@aequitas-academy.ru</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-title">Подпишитесь</h3>
+                    <p class="newsletter-text">Получайте последние новости и анонсы мероприятий первыми</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Ваш email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright"><p>© 2025 Академия AEQUITAS. Все права защищены.</p></div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
+function showMessage(message, isError = true) {
+    alert(message);
+}
+
+function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+// ========== API ФУНКЦИИ ==========
+async function apiRequest(action, method = 'POST', data = null) {
+    try {
+        const options = { method: method, headers: { 'Content-Type': 'application/json' } };
+        if (data) options.body = JSON.stringify(data);
+        const response = await fetch(`/php/api.php?action=${action}`, options);
+        return await response.json();
+    } catch(e) {
+        console.error('API Error:', e);
+        return { success: false, message: 'Ошибка соединения с сервером' };
+    }
+}
+
+async function registerUser(userData) {
+    const result = await apiRequest('register', 'POST', userData);
+    if (result.success) showMessage(result.message, false);
+    else showMessage(result.message);
+    return result;
+}
+
+async function loginUser(email, password) {
+    const result = await apiRequest('login', 'POST', { email, password });
+    if (result.success) showMessage(result.message, false);
+    else showMessage(result.message);
+    return result;
+}
+
+async function verifyTeacherCode(code) {
+    return await apiRequest('verify-teacher-code', 'POST', { code });
+}
+
+async function logoutUser() {
+    const result = await apiRequest('logout', 'POST');
+    if (result.success) location.reload();
+}
+
+async function getCurrentUser() {
+    const result = await apiRequest('get-user', 'GET');
+    return result.success ? result.data : null;
+}
+
+// ========== ЗАГРУЗКА ДАННЫХ ДАШБОРДА ==========
+async function loadUserStats() {
+    const result = await apiRequest('get-user-stats', 'GET');
+    if (result.success && result.data) {
+        const s = result.data;
+        document.getElementById('userStats').innerHTML = `
+            <div class="stat-card-modern">
+                <div class="stat-icon-modern"><i class="fas fa-book-open"></i></div>
+                <div class="stat-info-modern">
+                    <h3>Мои курсы</h3>
+                    <div class="stat-number-modern">${s.courses_count || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card-modern">
+                <div class="stat-icon-modern"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info-modern">
+                    <h3>Пройдено уроков</h3>
+                    <div class="stat-number-modern">${s.completed_lessons || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card-modern">
+                <div class="stat-icon-modern"><i class="fas fa-trophy"></i></div>
+                <div class="stat-info-modern">
+                    <h3>Достижения</h3>
+                    <div class="stat-number-modern">${s.achievements_count || 0}</div>
+                </div>
+            </div>
+            <div class="stat-card-modern">
+                <div class="stat-icon-modern"><i class="fas fa-chart-line"></i></div>
+                <div class="stat-info-modern">
+                    <h3>Общий прогресс</h3>
+                    <div class="stat-number-modern">${s.avg_progress || 0}%</div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+async function loadMyCourses() {
+    const result = await apiRequest('get-courses', 'GET');
+    if (result.success && result.data) {
+        const courses = result.data;
+        const container = document.getElementById('myCoursesList');
+        
+        if (courses.length === 0) {
+            container.innerHTML = `<div class="empty-state-modern"><i class="fas fa-book-open"></i><h3>У вас пока нет курсов</h3><p>Свяжитесь с администратором для записи на курсы</p></div>`;
+            return;
+        }
+        
+        container.innerHTML = `
+            <div class="student-dashboard">
+                ${courses.map(course => `
+                    <div class="dashboard-card-modern" onclick="alert('Курс: ${escapeHtml(course.title)}')">
+                        <div class="card-header-modern">
+                            <i class="fas ${course.icon || 'fa-book'}"></i>
+                            <h3>${escapeHtml(course.title)}</h3>
+                        </div>
+                        <p style="color: #6c757d; margin-bottom: 15px;">${escapeHtml(course.description?.substring(0, 100) || 'Описание курса')}...</p>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>Прогресс</span>
+                                <span>${course.progress || 0}%</span>
+                            </div>
+                            <div class="course-progress"><div class="progress-bar" style="width: ${course.progress || 0}%"></div></div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        
+        // Обновляем дашборд
+        const dashboardContainer = document.getElementById('dashboardCourses');
+        if (dashboardContainer && courses.length > 0) {
+            dashboardContainer.innerHTML = `
+                <div class="student-dashboard">
+                    <div class="dashboard-card-modern">
+                        <div class="card-header-modern"><i class="fas fa-graduation-cap"></i><h3>Мои активные курсы</h3></div>
+                        ${courses.slice(0, 3).map(course => `
+                            <div style="margin-bottom: 15px;" onclick="alert('${escapeHtml(course.title)}')">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <strong>${escapeHtml(course.title)}</strong>
+                                    <span>${course.progress || 0}%</span>
+                                </div>
+                                <div class="course-progress"><div class="progress-bar" style="width: ${course.progress || 0}%"></div></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+    }
+}
+
+async function loadHomeworks() {
+    const result = await apiRequest('get-homeworks', 'GET');
+    if (result.success && result.data) {
+        const homeworks = result.data;
+        const container = document.getElementById('homeworksList');
+        
+        if (homeworks.length === 0) {
+            container.innerHTML = `<div class="empty-state-modern"><i class="fas fa-tasks"></i><h3>Нет домашних заданий</h3></div>`;
+            return;
+        }
+        
+        container.innerHTML = `
+            <div class="student-dashboard">
+                ${homeworks.map(hw => `
+                    <div class="dashboard-card-modern">
+                        <div class="card-header-modern">
+                            <i class="fas fa-tasks"></i>
+                            <h3>${escapeHtml(hw.title)}</h3>
+                        </div>
+                        <p style="color: #6c757d; margin-bottom: 10px;"><strong>Курс:</strong> ${escapeHtml(hw.course_title || 'Нет курса')}</p>
+                        <p style="color: #6c757d; margin-bottom: 15px;">${escapeHtml(hw.description?.substring(0, 100) || 'Нет описания')}...</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; color: ${hw.status === 'graded' ? '#28a745' : (hw.status === 'pending' ? '#f57c00' : '#6c757d')}">
+                                ${hw.status === 'graded' ? '✅ Проверено' : (hw.status === 'pending' ? '⏳ На проверке' : '📝 Не сдано')}
+                            </span>
+                            ${hw.score ? `<span style="font-weight: 600;">Оценка: ${hw.score}</span>` : ''}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    } else {
+        document.getElementById('homeworksList').innerHTML = `<div class="empty-state-modern"><i class="fas fa-tasks"></i><h3>Загрузка...</h3></div>`;
+    }
+}
+
+async function loadSchedule() {
+    const result = await apiRequest('get-schedule', 'GET');
+    if (result.success && result.data) {
+        const schedule = result.data;
+        const container = document.getElementById('scheduleList');
+        
+        if (Object.keys(schedule).length === 0) {
+            container.innerHTML = `<div class="empty-state-modern"><i class="fas fa-calendar-alt"></i><h3>Нет занятий в расписании</h3></div>`;
+            return;
+        }
+        
+        let html = '<div class="student-dashboard">';
+        for (const [day, items] of Object.entries(schedule)) {
+            const dayRu = { 'monday':'ПН', 'tuesday':'ВТ', 'wednesday':'СР', 'thursday':'ЧТ', 'friday':'ПТ', 'saturday':'СБ', 'sunday':'ВС' }[day] || day;
+            html += `
+                <div class="dashboard-card-modern">
+                    <div class="card-header-modern">
+                        <i class="fas fa-calendar-day"></i>
+                        <h3>${dayRu}</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        ${items.map(item => `
+                            <div style="display: flex; align-items: center; gap: 15px; padding: 10px; background: #f8f9fa; border-radius: 12px;">
+                                <div style="min-width: 80px;">
+                                    <span style="font-weight: 700; color: #406314;">${item.start_time?.substring(0, 5)}</span>
+                                    <span> - ${item.end_time?.substring(0, 5)}</span>
+                                </div>
+                                <div>
+                                    <strong>${escapeHtml(item.course_title)}</strong>
+                                    ${item.room ? `<p style="font-size: 0.75rem; color: #6c757d;"><i class="fas fa-door-open"></i> ${escapeHtml(item.room)}</p>` : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        html += '</div>';
+        container.innerHTML = html;
+    }
+}
+
+async function loadAchievements() {
+    const result = await apiRequest('get-achievements', 'GET');
+    if (result.success && result.data) {
+        const achievements = result.data;
+        const container = document.getElementById('achievementsList');
+        
+        container.innerHTML = `
+            <div class="student-dashboard">
+                ${achievements.map(ach => `
+                    <div class="dashboard-card-modern" style="text-align: center;">
+                        <div style="font-size: 3rem; color: ${ach.earned ? (ach.color || '#ffc107') : '#ccc'};">
+                            <i class="fas ${ach.icon || 'fa-trophy'}"></i>
+                        </div>
+                        <h3 style="margin: 15px 0 5px;">${escapeHtml(ach.title)}</h3>
+                        <p style="color: #6c757d;">${escapeHtml(ach.description || '')}</p>
+                        <div class="user-role-badge" style="margin-top: 10px; background: ${ach.earned ? '#e8f5e9' : '#f8f9fa'}; color: ${ach.earned ? '#388e3c' : '#6c757d'};">
+                            <i class="fas ${ach.earned ? 'fa-check-circle' : 'fa-lock'}"></i>
+                            ${ach.earned ? 'Получено' : 'Не получено'} | ${ach.points} очков
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+}
+
+// ========== НАВИГАЦИЯ ==========
+function switchToSection(section) {
+    document.querySelectorAll('.dashboard-section').forEach(s => s.classList.remove('active'));
+    document.getElementById(`${section}Section`).classList.add('active');
+    
+    document.querySelectorAll('.admin-tab-modern').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-section="${section}"]`).classList.add('active');
+    
+    // Загружаем данные для секции
+    if (section === 'courses') loadMyCourses();
+    if (section === 'homeworks') loadHomeworks();
+    if (section === 'schedule') loadSchedule();
+    if (section === 'achievements') loadAchievements();
+}
+
+// ========== ИНИЦИАЛИЗАЦИЯ ==========
+document.addEventListener('DOMContentLoaded', async function() {
+    // Бургер-меню
+    const burgerMenu = document.getElementById('burgerMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (burgerMenu && mobileMenu) {
+        burgerMenu.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+    
+    document.querySelectorAll('.mobile-nav-list a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (mobileMenu) mobileMenu.classList.remove('active');
+            if (burgerMenu) burgerMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // Скролл хедера
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+    });
+    
+    // Переключение пароля
+    document.querySelectorAll('.password-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            if (input) {
+                const icon = this.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+        });
+    });
+    
+    // Переключение вкладок авторизации
+    const loginAuthTab = document.getElementById('loginAuthTab');
+    const registerAuthTab = document.getElementById('registerAuthTab');
+    const loginPane = document.getElementById('loginPane');
+    const registerPane = document.getElementById('registerPane');
+    const switchToRegister = document.getElementById('switchToRegister');
+    const switchToLogin = document.getElementById('switchToLogin');
+    
+    function switchAuthTab(tab) {
+        if (tab === 'login') {
+            loginPane.classList.add('active');
+            registerPane.classList.remove('active');
+            loginAuthTab.classList.add('active');
+            registerAuthTab.classList.remove('active');
+        } else {
+            loginPane.classList.remove('active');
+            registerPane.classList.add('active');
+            loginAuthTab.classList.remove('active');
+            registerAuthTab.classList.add('active');
+        }
+    }
+    
+    if (loginAuthTab) loginAuthTab.addEventListener('click', () => switchAuthTab('login'));
+    if (registerAuthTab) registerAuthTab.addEventListener('click', () => switchAuthTab('register'));
+    if (switchToRegister) switchToRegister.addEventListener('click', (e) => { e.preventDefault(); switchAuthTab('register'); });
+    if (switchToLogin) switchToLogin.addEventListener('click', (e) => { e.preventDefault(); switchAuthTab('login'); });
+    
+    // Показ поля кода преподавателя
+    const roleRadios = document.querySelectorAll('input[name="role_type"]');
+    const teacherCodeField = document.getElementById('teacherCodeField');
+    const teacherCodeInput = document.getElementById('teacherCode');
+    const codeVerifyStatus = document.getElementById('codeVerifyStatus');
+    let codeValid = false;
+    
+    function toggleTeacherCodeField() {
+        const isTeacher = document.querySelector('input[name="role_type"]:checked').value === 'teacher';
+        if (isTeacher) {
+            teacherCodeField.classList.add('show');
+        } else {
+            teacherCodeField.classList.remove('show');
+            if (codeVerifyStatus) codeVerifyStatus.innerHTML = '';
+            codeValid = false;
+        }
+    }
+    
+    roleRadios.forEach(radio => radio.addEventListener('change', toggleTeacherCodeField));
+    toggleTeacherCodeField();
+    
+    // Проверка кода
+    let verifyTimeout;
+    if (teacherCodeInput) {
+        teacherCodeInput.addEventListener('input', function() {
+            clearTimeout(verifyTimeout);
+            verifyTimeout = setTimeout(async () => {
+                const code = this.value.trim();
+                if (code.length >= 4) {
+                    const result = await verifyTeacherCode(code);
+                    if (result.success) {
+                        if (codeVerifyStatus) codeVerifyStatus.innerHTML = '<span style="color: #28a745;">✓ Код действителен</span>';
+                        codeValid = true;
+                    } else {
+                        if (codeVerifyStatus) codeVerifyStatus.innerHTML = '<span style="color: #dc3545;">✗ ' + result.message + '</span>';
+                        codeValid = false;
+                    }
+                } else {
+                    if (codeVerifyStatus) codeVerifyStatus.innerHTML = '';
+                    codeValid = false;
+                }
+            }, 500);
+        });
+    }
+    
+    // Регистрация
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('firstName').value.trim();
+            const surname = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const agreement = document.getElementById('agreement');
+            const roleType = document.querySelector('input[name="role_type"]:checked').value;
+            
+            if (!name || !surname || !email || !password) { showMessage('Заполните все поля'); return; }
+            if (!agreement.checked) { showMessage('Согласитесь с условиями'); return; }
+            if (password.length < 6) { showMessage('Пароль минимум 6 символов'); return; }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showMessage('Введите корректный email'); return; }
+            
+            let teacherCode = '';
+            if (roleType === 'teacher') {
+                if (!codeValid) { showMessage('Введите действительный код доступа'); return; }
+                teacherCode = teacherCodeInput.value.trim();
+            }
+            
+            const result = await registerUser({ name, surname, email, phone, password, role_type: roleType, teacher_code: teacherCode });
+            if (result.success) {
+                switchAuthTab('login');
+                registerForm.reset();
+                document.getElementById('loginEmail').value = email;
+                document.getElementById('loginPassword').value = password;
+            }
+        });
+    }
+    
+    // Вход
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const remember = document.getElementById('rememberMe').checked;
+            
+            if (!email || !password) { showMessage('Заполните все поля'); return; }
+            
+            const result = await loginUser(email, password);
+            if (result.success) {
+                if (remember) localStorage.setItem('aequitas_remembered', JSON.stringify({ email, password }));
+                else localStorage.removeItem('aequitas_remembered');
+                location.reload();
+            }
+        });
+    }
+    
+    // Автозаполнение
+    const remembered = localStorage.getItem('aequitas_remembered');
+    if (remembered) {
+        try {
+            const { email, password } = JSON.parse(remembered);
+            if (document.getElementById('loginEmail')) document.getElementById('loginEmail').value = email;
+            if (document.getElementById('loginPassword')) document.getElementById('loginPassword').value = password;
+            if (document.getElementById('rememberMe')) document.getElementById('rememberMe').checked = true;
+        } catch(e) {}
+    }
+    
+    // Забыли пароль
+    document.getElementById('forgotPasswordLink')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showMessage('Инструкции по восстановлению пароля отправлены на ваш email', false);
+    });
+    
+    // Подписка на новости
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const input = this.querySelector('input');
+            const email = input.value.trim();
+            if (email && email.includes('@')) {
+                const result = await apiRequest('subscribe', 'POST', { email });
+                showMessage(result.message, !result.success);
+                if (result.success) this.reset();
+            } else showMessage('Введите корректный email');
+        });
+    }
+    
+    // Переключение секций дашборда
+    document.querySelectorAll('[data-section]').forEach(btn => {
+        btn.addEventListener('click', () => switchToSection(btn.dataset.section));
+    });
+    
+    // Проверка авторизации
+    const user = await getCurrentUser();
+    if (user) {
+        document.getElementById('unauthContent').style.display = 'none';
+        document.getElementById('authContent').style.display = 'block';
+        document.getElementById('welcomeMessage').innerHTML = `Добро пожаловать, ${escapeHtml(user.name)} ${escapeHtml(user.surname)}!`;
+        document.getElementById('userEmail').innerHTML = user.email;
+        
+        const roleBadge = document.getElementById('userRoleBadge');
+        if (user.role === 'admin') {
+            roleBadge.innerHTML = '<i class="fas fa-crown"></i> Администратор';
+            roleBadge.className = 'user-role-badge role-admin';
+        } else if (user.role_type === 'teacher') {
+            roleBadge.innerHTML = '<i class="fas fa-chalkboard-user"></i> Преподаватель';
+            roleBadge.className = 'user-role-badge role-teacher';
+        } else {
+            roleBadge.innerHTML = '<i class="fas fa-user-graduate"></i> Студент';
+            roleBadge.className = 'user-role-badge role-student';
+        }
+        
+        // Загружаем данные
+        await loadUserStats();
+        await loadMyCourses();
+        await loadHomeworks();
+        await loadSchedule();
+        await loadAchievements();
+        
+        document.getElementById('logoutBtn').addEventListener('click', logoutUser);
+    }
+});
+</script>
+</body>
+</html>

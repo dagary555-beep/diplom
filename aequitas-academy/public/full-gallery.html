@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Фотогалерея - Академия AEQUITAS</title>
+    
+    <!-- Подключаем шрифты и иконки -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/logo1.png">
+    
+    <!-- Основные стили сайта -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Специфичные стили для страницы галереи -->
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+
+    
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="images/logo.png" alt="Логотип" class="nav-logo">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link"><span>Главная</span></a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link"><span>О нас</span></a></li>
+                <li class="nav-item"><a href="admission.html" class="nav-link"><span>Поступление</span></a></li>
+                <li class="nav-item"><a href="news.html" class="nav-link"><span>Новости</span></a></li>
+                <li class="nav-item"><a href="full-gallery.html" class="nav-link active"><span>Медиа</span></a></li>
+                <li class="nav-item"><a href="contacts.html" class="nav-link"><span>Контакты</span></a></li>
+                <li class="nav-item"><a href="cabinet.html" class="nav-link cabinet"><i class="fas fa-user-circle"></i><span>Личный кабинет</span></a></li>
+            </ul>
+            <button class="burger-menu" id="burgerMenu" aria-label="Меню"><span></span><span></span><span></span></button>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="admission.html">Поступление</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="full-gallery.html">Медиа</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="cabinet.html"><i class="fas fa-user-circle"></i> Личный кабинет</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero секция -->
+    <section class="gallery-hero">
+        <div class="hero-particles" id="particles"></div>
+        <div class="container">
+            <h1 class="hero-title animate-left">Фотогалерея <span>академии</span></h1>
+            <p class="hero-description animate-left" style="animation-delay: 0.2s;">Уникальные моменты из жизни наших учеников и преподавателей</p>
+        </div>
+    </section>
+
+    <!-- Галерея по темам -->
+    <section class="gallery-section">
+        <div class="gallery-filter">
+            <button class="filter-btn active" data-filter="all">Все темы</button>
+            <button class="filter-btn" data-filter="study">Учебный процесс</button>
+            <button class="filter-btn" data-filter="science">Наука</button>
+            <button class="filter-btn" data-filter="sport">Спорт</button>
+            <button class="filter-btn" data-filter="art">Творчество</button>
+            <button class="filter-btn" data-filter="events">События</button>
+        </div>
+
+        <div class="themes-grid" id="themesContainer"></div>
+
+        <div class="back-button">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Вернуться на главную</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Lightbox для просмотра фото внутри темы -->
+    <div class="theme-lightbox" id="themeLightbox">
+        <div class="theme-lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">&times;</button>
+            <div class="lightbox-image-container">
+                <button class="lightbox-nav-btn lightbox-prev" id="lightboxPrev" aria-label="Предыдущее фото"><i class="fas fa-chevron-left"></i></button>
+                <img class="lightbox-image" id="lightboxImage" src="" alt="Фото галереи">
+                <button class="lightbox-nav-btn lightbox-next" id="lightboxNext" aria-label="Следующее фото"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+            <div class="lightbox-theme-nav" id="lightboxThemeNav">
+                <button class="theme-nav-btn" id="prevThemeBtn"><i class="fas fa-chevron-left"></i> Предыдущая тема</button>
+                <button class="theme-nav-btn" id="nextThemeBtn">Следующая тема <i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <div class="footer-logo"><img src="images/logo.png" alt="Лого" class="footer-logo-img"></div>
+                        <p class="footer-description">Ведущая школа-интернат, сочетающая лучшие традиции образования с инновациями.</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-icon" aria-label="VK"><i class="fab fa-vk"></i></a>
+                            <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h3 class="footer-title">Навигация</h3>
+                        <ul class="footer-menu">
+                            <li><a href="index.html">Главная</a></li>
+                            <li><a href="about.html">О нас</a></li>
+                            <li><a href="admission.html">Поступление</a></li>
+                            <li><a href="news.html">Новости</a></li>
+                            <li><a href="full-gallery.html">Медиа</a></li>
+                            <li><a href="contacts.html">Контакты</a></li>
+                            <li><a href="cabinet.html">Личный кабинет</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3 class="footer-title">Контакты</h3>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-map-marker-alt"></i><span>г. Москва, ул. Образцовая, 15</span></li>
+                            <li><i class="fas fa-phone-alt"></i><span>+7 (495) 123-45-67</span></li>
+                            <li><i class="fas fa-envelope"></i><span>info@aequitas-academy.ru</span></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3 class="footer-title">Подпишитесь</h3>
+                        <p class="newsletter-text">Получайте последние новости первыми</p>
+                        <form class="newsletter-form" id="newsletterForm" onsubmit="return false;">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button type="submit" aria-label="Подписаться"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="copyright"><p>© 2025 Академия AEQUITAS. Все права защищены.</p></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Данные галереи - сгруппированы по темам
+        const themesData = [
+            {
+                id: 1,
+                title: "Изучение будущей карьеры",
+                category: "study",
+                categoryName: "Учебный процесс",
+                description: "Практическое руководство для школьников и студентов: как осознанно подойти к выбору профессии, оценить свои сильные стороны и понять тенденции рынка труда.",
+                previewImage: "images/event/event1-1.png",
+                photos: [
+                    { img: "images/event/event1-1.png", title: "Экскурсия по кампусу", desc: "Гости академии знакомятся с территорией и учебными корпусами" },
+                    { img: "images/event/event1-2.png", title: "Научный мастер-класс", desc: "Преподаватели демонстрируют интересные опыты" },
+                    { img: "images/event/event1-3.png", title: "Встреча с преподавателями", desc: "Общение с педагогическим составом в неформальной обстановке" },
+                    { img: "images/scattered/scattered4.png", title: "Библиотека", desc: "Современное пространство для учебы и чтения" },
+                    { img: "images/photo/photo1.png", title: "Учебный процесс", desc: "Занятия в современной аудитории" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Научная конференция «Будущее науки»",
+                category: "science",
+                categoryName: "Наука",
+                description: "Межшкольная научная конференция собрала юных исследователей со всего региона. Наши ученики представили 15 проектов и завоевали 3 первых места.",
+                previewImage: "images/event/event2-1.png",
+                photos: [
+                    { img: "images/event/event2-1.png", title: "Защита исследовательских работ", desc: "Ученики представляют свои проекты перед жюри" },
+                    { img: "images/event/event2-2.png", title: "Демонстрация экспериментов", desc: "Практическая часть выступлений" },
+                    { img: "images/event/event2-3.png", title: "Церемония награждения", desc: "Вручение дипломов победителям и призерам" },
+                    { img: "images/achievement/achievement3.png", title: "Инновационные проекты", desc: "Разработки учеников в области науки" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Новогодний праздник",
+                category: "art",
+                categoryName: "Творчество",
+                description: "Традиционный новогодний праздник в академии стал настоящим волшебством. Ученики подготовили театральную постановку, творческие мастер-классы и праздничный концерт.",
+                previewImage: "images/event/event3-1.png",
+                photos: [
+                    { img: "images/event/event3-1.png", title: "Новогодний спектакль", desc: "Театральная постановка от учеников академии" },
+                    { img: "images/event/event3-2.png", title: "Мастерская украшений", desc: "Творческие мастер-классы для всех желающих" },
+                    { img: "images/event/event3-3.png", title: "Праздничный вечер", desc: "Совместный ужин у камина" },
+                    { img: "images/photo/photo4.png", title: "Творческие занятия", desc: "Урок рисования в студии" }
+                ]
+            },
+            {
+                id: 4,
+                title: "Спортивные достижения",
+                category: "sport",
+                categoryName: "Спорт",
+                description: "Наши ученики регулярно участвуют в соревнованиях и показывают высокие результаты. Сборная команда академии заняла первое место в городских соревнованиях.",
+                previewImage: "images/scattered/scattered2.png",
+                photos: [
+                    { img: "images/scattered/scattered2.png", title: "Спортивные соревнования", desc: "Командные игры и состязания" },
+                    { img: "images/scattered/scattered6.png", title: "На свежем воздухе", desc: "Активный отдых и занятия спортом на улице" },
+                    { img: "images/photo/photo2.png", title: "Спортивные мероприятия", desc: "Регулярные тренировки и соревнования" },
+                    { img: "images/achievement/achievement4.png", title: "Спортивные победы", desc: "Победители соревнований" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Творчество и искусство",
+                category: "art",
+                categoryName: "Творчество",
+                description: "Развитие творческих способностей через рисование, музыку и театральное искусство. Наши ученики регулярно участвуют в выставках и конкурсах.",
+                previewImage: "images/scattered/scattered3.png",
+                photos: [
+                    { img: "images/scattered/scattered3.png", title: "Творческий кружок", desc: "Занятия искусством и живописью" },
+                    { img: "images/photo/photo4.png", title: "Творческие занятия", desc: "Урок рисования в студии" },
+                    { img: "images/event/event3-2.png", title: "Мастерская украшений", desc: "Создание новогодних украшений" }
+                ]
+            },
+            {
+                id: 6,
+                title: "Путешествия и экспедиции",
+                category: "events",
+                categoryName: "События",
+                description: "Образовательные поездки и экспедиции, которые расширяют кругозор наших учеников. В этом году мы посетили Алтай и другие живописные места.",
+                previewImage: "images/scattered/scattered8.png",
+                photos: [
+                    { img: "images/scattered/scattered8.png", title: "Поездка на Алтай", desc: "Образовательная экспедиция в горы" },
+                    { img: "images/scattered/scattered7.png", title: "Вечер воскресенья", desc: "Досуг и отдых в академии" },
+                    { img: "images/scattered/scattered6.png", title: "На свежем воздухе", desc: "Прогулки и активный отдых" }
+                ]
+            },
+            {
+                id: 7,
+                title: "Достижения и награды",
+                category: "study",
+                categoryName: "Учебный процесс",
+                description: "Наши ученики и преподаватели регулярно получают награды на различных конкурсах и олимпиадах. Мы гордимся их успехами!",
+                previewImage: "images/achievement/achievement2.png",
+                photos: [
+                    { img: "images/achievement/achievement1.png", title: "Выпускники академии", desc: "Торжественное вручение аттестатов" },
+                    { img: "images/achievement/achievement2.png", title: "Международные награды", desc: "Победы на олимпиадах" },
+                    { img: "images/achievement/achievement3.png", title: "Инновационные проекты", desc: "Разработки учеников" },
+                    { img: "images/achievement/achievement4.png", title: "Спортивные победы", desc: "Победители соревнований" },
+                    { img: "images/event/event2-3.png", title: "Научные достижения", desc: "Награждение на конференции" }
+                ]
+            },
+            {
+                id: 8,
+                title: "Повседневная жизнь академии",
+                category: "study",
+                categoryName: "Учебный процесс",
+                description: "Повседневная жизнь наших учеников: от занятий в лабораториях до отдыха в библиотеке и столовой.",
+                previewImage: "images/scattered/scattered1.png",
+                photos: [
+                    { img: "images/scattered/scattered1.png", title: "Урок физики", desc: "Практические занятия в современных лабораториях" },
+                    { img: "images/scattered/scattered4.png", title: "Библиотека", desc: "Современное пространство для учебы и чтения" },
+                    { img: "images/scattered/scattered5.png", title: "Столовая академии", desc: "Уютное пространство для питания" },
+                    { img: "images/photo/photo1.png", title: "Учебный процесс", desc: "Занятия в современной аудитории" }
+                ]
+            }
+        ];
+
+        let currentTheme = null;
+        let currentThemeIndex = 0;
+        let currentPhotoIndex = 0;
+        let currentFilter = "all";
+
+        // Получение отфильтрованных тем
+        function getFilteredThemes() {
+            if (currentFilter === "all") return themesData;
+            return themesData.filter(theme => theme.category === currentFilter);
+        }
+
+        // Рендер тем
+        function renderThemes() {
+            const container = document.getElementById('themesContainer');
+            if (!container) return;
+            
+            const filteredThemes = getFilteredThemes();
+            
+            if (filteredThemes.length === 0) {
+                container.innerHTML = `
+                    <div class="gallery-empty">
+                        <i class="fas fa-images"></i>
+                        <h3>Темы не найдены</h3>
+                        <p>Попробуйте выбрать другой фильтр</p>
+                    </div>`;
+                return;
+            }
+            
+            container.innerHTML = filteredThemes.map(theme => `
+                <div class="theme-card" data-theme-id="${theme.id}">
+                    <div class="theme-preview">
+                        <img src="${theme.previewImage}" alt="${theme.title}" loading="lazy" onerror="this.src='images/logo.png'">
+                        <div class="photo-count">
+                            <i class="fas fa-images"></i> ${theme.photos.length} фото
+                        </div>
+                    </div>
+                    <div class="theme-info">
+                        <span class="theme-category">${theme.categoryName}</span>
+                        <h3 class="theme-title">${escapeHtml(theme.title)}</h3>
+                        <p class="theme-desc">${escapeHtml(theme.description.substring(0, 100))}${theme.description.length > 100 ? '...' : ''}</p>
+                        <div class="theme-view-btn">
+                            <span>Смотреть галерею</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.querySelectorAll('.theme-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    const themeId = parseInt(this.getAttribute('data-theme-id'));
+                    const theme = themesData.find(t => t.id === themeId);
+                    if (theme) {
+                        openThemeLightbox(theme);
+                    }
+                });
+            });
+        }
+        
+        // Открыть lightbox для конкретной темы
+        function openThemeLightbox(theme) {
+            currentTheme = theme;
+            const filtered = getFilteredThemes();
+            currentThemeIndex = filtered.findIndex(t => t.id === theme.id);
+            if (currentThemeIndex === -1) currentThemeIndex = 0;
+            currentPhotoIndex = 0;
+            
+            const lightbox = document.getElementById('themeLightbox');
+            updateLightboxContent();
+            lightbox.classList.add('active');
+            document.body.classList.add('lightbox-open');
+        }
+        
+        // Обновить содержимое lightbox
+        function updateLightboxContent() {
+            if (!currentTheme || !currentTheme.photos.length) return;
+            
+            const photo = currentTheme.photos[currentPhotoIndex];
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            
+            if (lightboxImage) lightboxImage.src = photo.img;
+            if (lightboxCaption) lightboxCaption.innerHTML = `<i class="fas fa-camera"></i> ${escapeHtml(photo.title)} — ${escapeHtml(photo.desc)}`;
+            if (lightboxCounter) lightboxCounter.innerHTML = `${currentPhotoIndex + 1} / ${currentTheme.photos.length} | ${escapeHtml(currentTheme.title)}`;
+            
+            renderThumbnails();
+        }
+        
+        // Рендер миниатюр
+        function renderThumbnails() {
+            const container = document.getElementById('lightboxThumbnails');
+            if (!container || !currentTheme) return;
+            
+            container.innerHTML = currentTheme.photos.map((photo, idx) => `
+                <img src="${photo.img}" alt="${escapeHtml(photo.title)}" class="lightbox-thumb ${idx === currentPhotoIndex ? 'active' : ''}" data-thumb-index="${idx}" onerror="this.src='images/logo.png'">
+            `).join('');
+            
+            document.querySelectorAll('.lightbox-thumb').forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    currentPhotoIndex = parseInt(this.getAttribute('data-thumb-index'));
+                    updateLightboxContent();
+                    updateActiveThumb();
+                });
+            });
+        }
+        
+        function updateActiveThumb() {
+            document.querySelectorAll('.lightbox-thumb').forEach((thumb, idx) => {
+                if (idx === currentPhotoIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+        
+        function nextPhoto() {
+            if (!currentTheme) return;
+            if (currentPhotoIndex < currentTheme.photos.length - 1) {
+                currentPhotoIndex++;
+                updateLightboxContent();
+            }
+        }
+        
+        function prevPhoto() {
+            if (!currentTheme) return;
+            if (currentPhotoIndex > 0) {
+                currentPhotoIndex--;
+                updateLightboxContent();
+            }
+        }
+        
+        function nextTheme() {
+            const filteredThemes = getFilteredThemes();
+            if (filteredThemes.length === 0) return;
+            
+            let newIndex = currentThemeIndex + 1;
+            if (newIndex >= filteredThemes.length) {
+                newIndex = 0;
+            }
+            openThemeLightbox(filteredThemes[newIndex]);
+        }
+        
+        function prevTheme() {
+            const filteredThemes = getFilteredThemes();
+            if (filteredThemes.length === 0) return;
+            
+            let newIndex = currentThemeIndex - 1;
+            if (newIndex < 0) {
+                newIndex = filteredThemes.length - 1;
+            }
+            openThemeLightbox(filteredThemes[newIndex]);
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.getElementById('themeLightbox');
+            lightbox.classList.remove('active');
+            document.body.classList.remove('lightbox-open');
+        }
+        
+        function filterThemes(category) {
+            currentFilter = category;
+            renderThemes();
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+        
+        function createParticles() {
+            const container = document.getElementById('particles');
+            if (!container) return;
+            container.innerHTML = '';
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('hero-particle');
+                const size = Math.random() * 8 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = Math.random() * 15 + 10 + 's';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        function setupNewsletter() {
+            const form = document.getElementById('newsletterForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input').value;
+                    if (email && email.includes('@')) {
+                        alert('Спасибо за подписку! Теперь вы будете получать наши новости.');
+                        this.reset();
+                    } else {
+                        alert('Пожалуйста, введите корректный email');
+                    }
+                });
+            }
+        }
+        
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            renderThemes();
+            setupNewsletter();
+            createParticles();
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterThemes(this.getAttribute('data-filter'));
+                });
+            });
+            
+            document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
+            document.getElementById('lightboxPrev')?.addEventListener('click', prevPhoto);
+            document.getElementById('lightboxNext')?.addEventListener('click', nextPhoto);
+            document.getElementById('prevThemeBtn')?.addEventListener('click', prevTheme);
+            document.getElementById('nextThemeBtn')?.addEventListener('click', nextTheme);
+            
+            document.getElementById('themeLightbox')?.addEventListener('click', function(e) {
+                if (e.target === this) closeLightbox();
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                const lightbox = document.getElementById('themeLightbox');
+                if (!lightbox || !lightbox.classList.contains('active')) return;
+                
+                switch(e.key) {
+                    case 'Escape': closeLightbox(); break;
+                    case 'ArrowLeft': prevPhoto(); break;
+                    case 'ArrowRight': nextPhoto(); break;
+                }
+            });
+            
+            const burgerMenu = document.getElementById('burgerMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (burgerMenu && mobileMenu) {
+                burgerMenu.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+                });
+            }
+            
+            document.querySelectorAll('.mobile-nav-list a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (mobileMenu) mobileMenu.classList.remove('active');
+                    if (burgerMenu) burgerMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            });
+        });
+    </script>
+</body>
+</html>

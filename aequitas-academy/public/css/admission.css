@@ -1,0 +1,570 @@
+/* Дополнительные стили для страницы поступления */
+
+/* Анимации */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-left {
+    animation: fadeInLeft 0.8s ease forwards;
+}
+
+.animate-right {
+    animation: fadeInRight 0.8s ease forwards;
+}
+
+.animate-scale {
+    animation: scaleIn 0.6s ease forwards;
+}
+
+/* Hero секция с фоновым изображением */
+.admission-hero-modern {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('../images/bg/admissionbg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.hero-particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    animation: floatParticle 20s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.admission-hero-modern .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 120px 30px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #a8e06e;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.hero-title-modern {
+    font-size: 4rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-title-modern span {
+    background: linear-gradient(135deg, #a8e06e, #6db33f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Секция с шагами поступления */
+.steps-section {
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8faf8 100%);
+}
+
+.section-header-custom {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-subtitle-custom {
+    color: #406314;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.section-title-custom {
+    font-size: 2.8rem;
+    color: #1a2a0e;
+    font-weight: 700;
+}
+
+.steps-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.step-card {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 60px;
+    background: white;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(64, 99, 20, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.step-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(64, 99, 20, 0.12);
+    border-color: rgba(64, 99, 20, 0.2);
+}
+
+.step-number-wrapper {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #406314, #5a8c29);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    box-shadow: 0 15px 30px rgba(64, 99, 20, 0.3);
+    transition: all 0.3s ease;
+}
+
+.step-card:hover .step-number-wrapper {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(64, 99, 20, 0.4);
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-title {
+    font-size: 1.8rem;
+    color: #2d4a12;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.step-text {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+/* Документы */
+.step-documents {
+    background: #f8faf8;
+    border-radius: 20px;
+    padding: 25px;
+    margin: 25px 0;
+    border-left: 4px solid #406314;
+}
+
+.documents-title {
+    font-size: 1.2rem;
+    color: #2d4a12;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.documents-list {
+    list-style: none;
+    padding: 0;
+}
+
+.document-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(64, 99, 20, 0.1);
+}
+
+.document-item:last-child {
+    border-bottom: none;
+}
+
+.document-item i {
+    color: #406314;
+    font-size: 1.2rem;
+    width: 30px;
+}
+
+.document-item span {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Решения */
+.decision-documents {
+    display: flex;
+    gap: 25px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.decision-item {
+    flex: 1;
+    min-width: 200px;
+    background: linear-gradient(135deg, #40631408, #5a8c2908);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(64, 99, 20, 0.1);
+}
+
+.decision-item:hover {
+    transform: translateY(-5px);
+    border-color: #406314;
+    background: white;
+}
+
+.decision-item i {
+    font-size: 2.5rem;
+    color: #406314;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.decision-item span {
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Кнопка отправки */
+.step-button-wrapper {
+    margin-top: 30px;
+}
+
+.step-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #406314, #5a8c29);
+    color: white;
+    text-decoration: none;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(64, 99, 20, 0.3);
+}
+
+.step-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(64, 99, 20, 0.4);
+    gap: 20px;
+}
+
+.step-button i {
+    font-size: 1.2rem;
+}
+
+/* Преимущества */
+.benefits-section {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #406314, #5a8c29);
+    color: white;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 40px 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.benefit-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+
+.benefit-icon i {
+    font-size: 2rem;
+    color: #a8e06e;
+}
+
+.benefit-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.benefit-card p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* CTA секция */
+.cta-section-admission {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.faq-contact {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-card {
+    background-color: #406314;
+    border-radius: 20px;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.contact-icon {
+    flex-shrink: 0;
+}
+
+.contact-icon i {
+    font-size: 4rem;
+    opacity: 0.9;
+    color: white;
+}
+
+.contact-content {
+    flex: 1;
+}
+
+.contact-content h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.contact-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.contact-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    background: white;
+    color: #406314;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.contact-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    background: #f0f7f0;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .hero-title-modern {
+        font-size: 3rem;
+    }
+    
+    .step-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 30px;
+    }
+    
+    .step-number-wrapper {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+    
+    .step-documents {
+        text-align: left;
+    }
+    
+    .decision-documents {
+        flex-direction: column;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .contact-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title-modern {
+        font-size: 2.2rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .section-title-custom {
+        font-size: 2rem;
+    }
+    
+    .step-title {
+        font-size: 1.5rem;
+    }
+    
+    .step-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+    
+    .contact-content h3 {
+        font-size: 1.6rem;
+    }
+    
+    .contact-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title-modern {
+        font-size: 1.8rem;
+    }
+    
+    .section-title-custom {
+        font-size: 1.6rem;
+    }
+    
+    .step-card {
+        padding: 20px;
+    }
+}

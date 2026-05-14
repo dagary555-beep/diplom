@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Академия AEQUITAS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="images/logo1.png">
+    <style>
+        /* Стили для hero секции контактов */
+        .contacts-hero-modern {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('images/bg/contactsbg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+        
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .hero-particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            animation: floatParticle 20s infinite linear;
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .contacts-hero-modern .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 30px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #a8e06e;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        .hero-title-modern {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .hero-title-modern span {
+            background: linear-gradient(135deg, #a8e06e, #6db33f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-left {
+            animation: fadeInLeft 0.8s ease forwards;
+        }
+        
+        /* Остальные стили для контактов */
+        .contact-info-section { padding: 80px 20px; background: linear-gradient(135deg, #ffffff 0%, #f8faf8 100%); }
+        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .contact-info-card { background: white; padding: 40px 30px; border-radius: 24px; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.05); transition: all 0.3s ease; border: 1px solid rgba(64,99,20,0.08); }
+        .contact-info-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(64,99,20,0.12); }
+        .contact-icon { width: 70px; height: 70px; background: linear-gradient(135deg, #406314, #5a8c29); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: white; font-size: 1.8rem; }
+        .contact-info-card h3 { font-size: 1.3rem; color: #2d4a12; margin-bottom: 15px; }
+        .contact-info-card p { color: #555; line-height: 1.6; margin-bottom: 8px; }
+        .contact-info-card a { color: #406314; text-decoration: none; }
+        .map-form-section { padding: 80px 20px; background: white; }
+        .map-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1400px; margin: 0 auto; }
+        .map-container { background: #f0f0f0; border-radius: 24px; overflow: hidden; height: 500px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+        .form-container { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); border: 1px solid rgba(64,99,20,0.1); }
+        .form-title { font-size: 1.8rem; color: #2d4a12; margin-bottom: 10px; }
+        .form-subtitle { color: #666; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 15px 20px; border: 2px solid rgba(64,99,20,0.15); border-radius: 12px; font-family: 'Montserrat', sans-serif; transition: all 0.3s ease; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #406314; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .checkbox-group { display: flex; align-items: center; gap: 12px; margin: 25px 0; }
+        .submit-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #406314, #5a8c29); color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .submit-btn:hover { transform: translateY(-3px); gap: 15px; box-shadow: 0 10px 25px rgba(64,99,20,0.3); }
+        .social-section { padding: 60px 20px; background: linear-gradient(135deg, #1a2a0e, #2d4a12); color: white; }
+        .social-title { text-align: center; font-size: 2rem; margin-bottom: 15px; }
+        .social-subtitle { text-align: center; color: rgba(255,255,255,0.8); margin-bottom: 50px; }
+        .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .social-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s ease; text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.2); }
+        .social-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.2); }
+        .social-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .social-card span { font-size: 1.1rem; font-weight: 600; }
+        .faq-contacts-section { padding: 80px 20px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); }
+        .faq-contacts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .faq-contacts-item { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.3s ease; border: 1px solid rgba(64,99,20,0.08); }
+        .faq-contacts-item:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(64,99,20,0.1); }
+        .faq-contacts-question { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .faq-contacts-question i { color: #406314; font-size: 1.5rem; }
+        .faq-contacts-question span { font-size: 1.2rem; font-weight: 600; color: #2d4a12; }
+        .faq-contacts-item p { color: #555; line-height: 1.6; margin-left: 45px; }
+        @media (max-width: 1200px) { .hero-title-modern { font-size: 3rem; } }
+        @media (max-width: 992px) { .contact-grid { grid-template-columns: 1fr; } .map-form-grid { grid-template-columns: 1fr; } .social-grid { grid-template-columns: repeat(2, 1fr); } .faq-contacts-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .hero-title-modern { font-size: 2.2rem; } .hero-description { font-size: 1rem; } .form-row { grid-template-columns: 1fr; } .form-container { padding: 25px; } .social-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="images/logo.png" alt="Логотип" class="nav-logo">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link"><span>Главная</span></a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link"><span>О нас</span></a></li>
+                <li class="nav-item"><a href="admission.html" class="nav-link"><span>Поступление</span></a></li>
+                <li class="nav-item"><a href="news.html" class="nav-link"><span>Новости</span></a></li>
+                <li class="nav-item"><a href="full-gallery.html" class="nav-link"><span>Медиа</span></a></li>
+                <li class="nav-item"><a href="contacts.html" class="nav-link"><span>Контакты</span></a></li>
+                <li class="nav-item"><a href="cabinet.html" class="nav-link cabinet"><i class="fas fa-user-circle"></i><span>Личный кабинет</span></a></li>
+            </ul>
+            <button class="burger-menu" id="burgerMenu"><span></span><span></span><span></span></button>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="admission.html">Поступление</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="full-gallery.html">Медиа</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="cabinet.html"><i class="fas fa-user-circle"></i> Личный кабинет</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="contacts-hero-modern">
+        <div class="hero-particles" id="particles"></div>
+        <div class="container">
+            <h1 class="hero-title-modern animate-left">Наши <span>контакты</span></h1>
+            <p class="hero-description animate-left" style="animation-delay: 0.2s;">Мы всегда рады ответить на ваши вопросы и помочь с поступлением</p>
+        </div>
+    </section>
+
+    <section class="map-form-section">
+        <div class="map-form-grid">
+            <div class="map-container">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=37.617698,55.755864&z=12&l=map" allowfullscreen="true" loading="lazy"></iframe>
+            </div>
+            <div class="form-container">
+                <h2 class="form-title">Напишите нам</h2>
+                <p class="form-subtitle">Задайте вопрос или оставьте заявку, мы свяжемся с вами в ближайшее время</p>
+                <form id="feedbackForm">
+                    <div class="form-row">
+                        <div class="form-group"><input type="text" id="name" placeholder="Ваше имя" required></div>
+                        <div class="form-group"><input type="email" id="email" placeholder="Ваш email" required></div>
+                    </div>
+                    <div class="form-group"><input type="tel" id="phone" placeholder="Ваш телефон"></div>
+                    <div class="form-group">
+                        <select id="subject">
+                            <option value="">Выберите тему обращения</option>
+                            <option value="admission">Поступление</option>
+                            <option value="question">Общий вопрос</option>
+                            <option value="tour">Запись на экскурсию</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><textarea id="message" rows="5" placeholder="Ваше сообщение" required></textarea></div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy" required>
+                        <label for="privacy">Я согласен на обработку персональных данных</label>
+                    </div>
+                    <button type="submit" class="submit-btn"><span>Отправить сообщение</span><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-info-section">
+        <div class="contact-grid">
+            <div class="contact-info-card">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Адрес</h3>
+                <p>г. Москва, ул. Образцовая, 15</p>
+                <p>Метро: Люблино</p>
+            </div>
+            <div class="contact-info-card">
+                <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                <h3>Телефон</h3>
+                <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
+                <p><a href="tel:+74957654321">+7 (495) 765-43-21</a></p>
+                <p>Ежедневно с 9:00 до 20:00</p>
+            </div>
+            <div class="contact-info-card">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <h3>Email</h3>
+                <p><a href="mailto:info@aequitas-academy.ru">info@aequitas-academy.ru</a></p>
+                <p><a href="mailto:admission@aequitas-academy.ru">admission@aequitas-academy.ru</a></p>
+                <p>Ответ в течение 24 часов</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-section">
+        <h2 class="social-title">Мы в социальных сетях</h2>
+        <p class="social-subtitle">Подписывайтесь, чтобы быть в курсе всех событий</p>
+        <div class="social-grid">
+            <a href="#" class="social-card"><i class="fab fa-telegram-plane"></i><span>Telegram</span></a>
+            <a href="#" class="social-card"><i class="fab fa-vk"></i><span>ВКонтакте</span></a>
+            <a href="#" class="social-card"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+            <a href="#" class="social-card"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+        </div>
+    </section>
+
+    <section class="faq-contacts-section">
+        <div class="faq-contacts-grid">
+            <div class="faq-contacts-item">
+                <div class="faq-contacts-question"><i class="fas fa-question-circle"></i><span>Как записаться на экскурсию?</span></div>
+                <p>Вы можете записаться через форму обратной связи или позвонить нам по телефону +7 (495) 123-45-67.</p>
+            </div>
+            <div class="faq-contacts-item">
+                <div class="faq-contacts-question"><i class="fas fa-question-circle"></i><span>Когда можно приехать в академию?</span></div>
+                <p>Экскурсии проводятся по будням с 10:00 до 16:00. Запись обязательна.</p>
+            </div>
+            <div class="faq-contacts-item">
+                <div class="faq-contacts-question"><i class="fas fa-question-circle"></i><span>Есть ли парковка для посетителей?</span></div>
+                <p>Да, на территории академии есть гостевая парковка на 20 мест.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <div class="footer-logo"><img src="images/logo.png" alt="Лого" class="footer-logo-img"></div>
+                        <p class="footer-description">Ведущая школа-интернат для вашего ребенка.</p>
+                    </div>
+                    <div class="footer-col">
+                        <h3 class="footer-title">Навигация</h3>
+                        <ul class="footer-menu">
+                            <li><a href="index.html">Главная</a></li>
+                            <li><a href="about.html">О нас</a></li>
+                            <li><a href="admission.html">Поступление</a></li>
+                            <li><a href="news.html">Новости</a></li>
+                            <li><a href="full-gallery.html">Медиа</a></li>
+                            <li><a href="contacts.html">Контакты</a></li>
+                            <li><a href="cabinet.html">Личный кабинет</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3 class="footer-title">Контакты</h3>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-map-marker-alt"></i><span>г. Москва, ул. Образцовая, 15</span></li>
+                            <li><i class="fas fa-phone-alt"></i><span>+7 (495) 123-45-67</span></li>
+                            <li><i class="fas fa-envelope"></i><span>info@aequitas-academy.ru</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom"><div class="copyright"><p>© 2024 Академия AEQUITAS. Все права защищены.</p></div></div>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    document.getElementById('feedbackForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        name: document.getElementById('name')?.value,
+        email: document.getElementById('email')?.value,
+        phone: document.getElementById('phone')?.value,
+        subject: document.getElementById('subject')?.value,
+        message: document.getElementById('message')?.value
+    };
+    
+    if (!formData.name || !formData.email || !formData.message) {
+        alert('Пожалуйста, заполните все обязательные поля');
+        return;
+    }
+    
+    const privacy = document.getElementById('privacy')?.checked;
+    if (!privacy) {
+        alert('Пожалуйста, согласитесь на обработку персональных данных');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/php/api.php?action=add-application', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert(result.message);
+            this.reset();
+        } else {
+            alert(result.message);
+        }
+    } catch(e) {
+        console.error('Ошибка:', e);
+        alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+    }
+});
+
+    // Бургер-меню
+    const burgerMenu = document.getElementById('burgerMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (burgerMenu && mobileMenu) {
+        burgerMenu.addEventListener('click', () => { 
+            burgerMenu.classList.toggle('active'); 
+            mobileMenu.classList.toggle('active'); 
+        });
+    }
+    
+    document.querySelectorAll('.mobile-nav-list a').forEach(link => {
+        link.addEventListener('click', () => { 
+            mobileMenu.classList.remove('active'); 
+            burgerMenu.classList.remove('active'); 
+        });
+    });
+    
+    // Скролл хедера
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => { 
+        if (window.scrollY > 50) header.classList.add('scrolled'); 
+        else header.classList.remove('scrolled'); 
+    });
+    
+    // Частицы
+    function createParticles() {
+        const container = document.getElementById('particles');
+        if (!container) return;
+        for (let i = 0; i < 50; i++) { 
+            const p = document.createElement('div'); 
+            p.classList.add('hero-particle'); 
+            p.style.width = Math.random() * 8 + 2 + 'px'; 
+            p.style.height = p.style.width; 
+            p.style.left = Math.random() * 100 + '%'; 
+            p.style.animationDuration = Math.random() * 15 + 10 + 's'; 
+            p.style.animationDelay = Math.random() * 20 + 's'; 
+            container.appendChild(p); 
+        }
+    }
+    createParticles();
+</script>
+
+</body>
+</html>
